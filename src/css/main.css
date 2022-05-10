@@ -1,0 +1,307 @@
+.App {
+  padding: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+.home{
+  overflow-x: hidden;
+}
+.css-1p5q5e5-MuiStack-root .css-sghohy-MuiButtonBase-root-MuiButton-root {
+  width: 70px;
+  cursor: pointer;
+}
+.MuiFormControlLabel-label{
+  width: 85px;
+  font-size: 9px;
+}
+.css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
+  font-size: 9px;
+}
+.css-dqr9h-MuiRating-label {
+  font-size: 16px;
+}
+.MuiAvatar-colorDefault.css-lu09eo-MuiAvatar-root,
+.css-1sd9dck-MuiAvatar-root,
+.css-tdcjsm-MuiAvatar-root,
+.css-56n1jg-MuiAvatar-root,
+.css-erna2z-MuiAvatar-root,
+.css-1wlmgte-MuiAvatar-root {
+  font-size: 9px !important;
+  text-transform: uppercase !important;
+  width: 26px !important;
+  height: 26px !important;
+  /* margin-top: 14px !important; */
+  margin: 5px 0 !important;
+}
+.css-15wwp11-MuiTableHead-root {
+  background: white;
+}
+.css-apqrd9-MuiTableBody-root .css-1q1u3t4-MuiTableRow-root{
+  background-color: #ceecef33;
+}
+.css-cedraj-MuiChip-root,
+.css-14sgb8i-MuiChip-root, .css-1lgcf90-MuiChip-root {
+  height: 20px !important;
+  text-transform: uppercase !important;
+  font-size: 9px !important;
+}
+.css-1ygcj2i-MuiTableCell-root{
+  text-transform: uppercase;
+}
+.css-1ex1afd-MuiTableCell-root{
+  color: #000 !important;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+}
+.css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label {
+  font-size: 16px;
+  margin-left: 9px;
+}
+.css-i4bv87-MuiSvgIcon-root {
+  font-size: 15px;
+}
+svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-i4bv87-MuiSvgIcon-root{
+
+  font-size: 13px;
+}
+.MuiBox-root.css-eeayb9 {
+  display: flex;
+  align-items: end;
+  padding-bottom: 12px;
+}
+.css-eeayb9 {
+  margin-left: 35px;
+}
+.css-sghohy-MuiButtonBase-root-MuiButton-root {
+  font-size: 9px !important;
+  white-space: nowrap;
+}
+form.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.css-1n5877y-MuiPaper-root {
+  height: 26px;
+  margin-left: 20px;
+}
+.MuiInputBase-root.MuiInputBase-colorPrimary.css-piqts5-MuiInputBase-root {
+  font-size: 10px;
+}
+.css-1jewqar span {
+  display: flex;
+  margin-top: 13px;
+  margin-bottom: 13px;
+  font-size: 15px;
+}
+.css-1f3ornv span{
+  margin-top: 4px;
+  margin-bottom: -9px;
+  font-size: 15px;
+}
+button.MuiButton-root.MuiButton-outlined.MuiButton-outlinedPrimary.MuiButton-sizeMedium.MuiButton-outlinedSizeMedium.MuiButtonBase-root.css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
+  font-size: 11px;
+    /* height: 22px; */
+    margin-right: 10px;
+    display: flex;
+    /* align-items: center; */
+    /* padding: 2px 38px; */
+    white-space: nowrap;
+    margin-bottom: 5px;
+    font-family: 'Poppins', sans-serif;
+}
+.css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
+  min-width: 0 !important;
+}
+.css-1ex1afd-MuiTableCell-root{
+  padding: 0 !important;
+}
+span.MuiCheckbox-root.MuiCheckbox-colorPrimary.MuiButtonBase-root.MuiCheckbox-root.MuiCheckbox-colorPrimary.PrivateSwitchBase-root.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root {
+  margin-right: -7px;
+}
+.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root{
+  /* margin-right: 2px !important;
+  display: block !important; */
+  padding: 0 !important;
+}
+label.MuiFormControlLabel-root.MuiFormControlLabel-labelPlacementEnd.css-j204z7-MuiFormControlLabel-root {
+  width: 85px;
+  margin-bottom: 5px;
+  white-space: nowrap;
+}
+.css-j204z7-MuiFormControlLabel-root{
+  margin-left: 0 !important;
+}
+.css-15v22id-MuiAccordionDetails-root {
+  padding: 8px 6px 16px !important;
+}
+/* test */
+.App1 {
+  text-align: left;
+}
+
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 1.5vmin);
+}
+
+.App-link {
+  color: #8bb4ff;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.characters {
+  list-style: none;
+  padding-left: 0;
+}
+
+.characters li {
+  display: flex;
+  align-items: center;
+  border: solid 2px #d0d0d0;
+  border-radius: .2em;
+  padding: .5em .8em .5em .5em;
+  margin-bottom: 1em;
+}
+
+.characters p {
+  max-width: none;
+  font-weight: bold;
+  margin: 0;
+}
+
+.characters-thumb {
+  overflow: hidden;
+  flex-shrink: 0;
+  width: 2em;
+  height: 2em;
+  background-color: #e8e8e8;
+  padding: .5em;
+  margin-right: .5em;
+  cursor: pointer;
+}
+
+.characters-thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/* custom table */
+table {
+  width: 1280px;
+  margin: auto;
+  font-family: 'Poppins', sans-serif;
+  padding: 20px 0;
+}
+th,td,tr,table{
+  /* border: 1px solid #000; */
+}
+tr{
+  /* display: table-row; */
+  display: block;
+  margin: 6px 0;
+  /* box-shadow: 0 1px 6px rgb(0 0 0 / 10%); */
+    border-radius: 6px;
+    /* background-color: #F9FBFF; */
+}
+td{
+  white-space: nowrap;
+  overflow: hidden;
+  /* box-shadow: 0 1px 6px rgb(0 0 0 / 10%); */
+}
+th,td{
+  /* display: table-cell; */
+  display:inline-grid;
+  font-size: 13px;
+  text-align: left;
+  /* padding-left: 3px !important; */
+}
+/* td{
+  background-color: #ebecef7a
+} */
+tbody.table-body {
+    width: 100%;
+    display: table;
+}
+.table-body tr {
+  background-color: #F9FBFF !important;
+  padding: 3px 0 !important;
+}
+.table-body tr td{
+  padding-left: 5px;
+}
+thead th{
+  padding-left: 5px !important;
+}
+th {
+  color: #9b9b9b;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+tr.color-rowHome{
+  background-color: rgb(221, 235, 255);
+}
+tr.color-row{
+  background-color:#8bb4ff;
+  /* background-color: rgb(221, 235, 255); */
+}
+.css-1qaf1kb {
+  padding: 0 20px;
+}
+.switchButton {
+  min-width: 180px !important;
+  white-space: nowrap;
+  font-size: 11px !important
+}
+/* scroll */
+/* width */
+.hideScroll::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+ 
+/* Handle */
+.hideScroll::-webkit-scrollbar-thumb {
+  background: #ddebff; 
+}
+/* Handle on hover */
+.hideScroll::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+}
+
+.newButton {
+  display: flex !important;
+  align-items: flex-start !important;
+}
+.buttonCollapse{
+  background-color: rgb(139, 180, 255);
+    color: white;
+    border: none;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+.newButton__Icon{
+  display: flex;
+  margin-left: -5px;
+}
+.newButton__Text{
+  display: flex;
+  margin-left: 5px;
+}
+.selected{
+  background-color: #407debcf !important;
+  color: white !important;
+  font-weight: 500 !important;
+  border: 1px solid white !important;
+}
+.css-1svt9zj {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  width: 1280px !important;
+}
