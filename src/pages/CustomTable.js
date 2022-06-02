@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useDebounce } from "use-debounce";
 import {
-  Button,
-  Box,
+  styled,
   Paper,
   Checkbox,
   FormControlLabel,
   InputBase,
   IconButton,
-  styled,
-  Chip,
   Avatar,
-} from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import SearchIcon from "@mui/icons-material/Search";
-import CircleIcon from "@mui/icons-material/Circle";
-import Rating from "@mui/material/Rating";
-import { dataTable, dataTableHeader } from "../data";
+  Chip,
+  AddIcon,
+  SearchIcon,
+  Rating,
+  CircleIcon,
+  Box,
+  Drawer,
+  Button,
+} from "../mui";
+import { dataTable, dataTableHeader, dataOpportunityType } from "../data";
+import NewOpportunity from "./newOportunity/NewOpportunity";
+import NewOpportunityType from "./newOportunity/NewOpportunityType";
 
 const StyledRating = styled(Rating)({
   "& .MuiRating-iconFilled": {
@@ -27,6 +31,58 @@ const StyledRating = styled(Rating)({
   // },
 });
 const CustomTable = () => {
+  const [state, setState] = useState({
+    left: false,
+  });
+  const [characters, updateCharacters] = useState(dataTable);
+  const [stateGuidance, setStateGuidance] = useState(false);
+
+  function handleOnDragEnd(result) {
+    if (!result.destination) return;
+
+    const items = Array.from(characters);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    updateCharacters(items);
+  }
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    // console.log("vao day ", event.type);
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setState({ ...state, [anchor]: open });
+    // console.log("vao day ", state);
+  };
+  const list = (anchor) => (
+    <Box
+      sx={{
+        width:
+          anchor === "top" || anchor === "bottom"
+            ? "auto"
+            : stateGuidance
+            ? 1360
+            : 1160,
+      }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, true)}
+      onKeyDown={toggleDrawer(anchor, true)}
+    >
+      <NewOpportunity
+        stateGuidance={stateGuidance}
+        setStateGuidance={setStateGuidance}
+      />
+      <NewOpportunityType
+        stateGuidance={stateGuidance}
+        setStateGuidance={setStateGuidance}
+      />
+    </Box>
+  );
+  //
   const [query, setQuery] = useState("");
   const keys = ["headline"];
   //
@@ -45,14 +101,17 @@ const CustomTable = () => {
   const [selectGroup, setSelectGroup] = useState(JSON.parse(object)?.type);
   const [key, setKey] = useState(JSON.parse(object)?.key || null);
   const handleClick = (e) => {
+    // console.log(expand);
     if (expand.get(e)) {
       const newMap = new Map(expand);
       newMap.delete(e);
       setExpand(newMap);
+      // console.log(expand);
     } else {
       const newMap = new Map(expand);
       newMap.set(e, true);
       setExpand(newMap);
+      // console.log(expand);
     }
   };
 
@@ -97,7 +156,7 @@ const CustomTable = () => {
   }
 
   const search = (data) => {
-    console.log("vao day ", data);
+    // console.log("vao day ", data);
     return data?.filter((item) =>
       keys.some((key) => item[key]?.toLowerCase().includes(debouncedValue))
     );
@@ -124,7 +183,6 @@ const CustomTable = () => {
               style={{
                 maxHeight: 50,
                 maxWidth: 300,
-                // overflow: "scroll hidden",
                 display: "flex",
                 marginTop: "10px",
               }}
@@ -147,10 +205,25 @@ const CustomTable = () => {
             </Box>
           </Box>
           <Box gridColumn="span 5">
-            <Button variant="contained" className="newButton">
-              <AddIcon className="newButton__Icon" />
-              <span className="newButton__Text">New Opportunity</span>
-            </Button>
+            {["left"].map((anchor) => (
+              <React.Fragment key={anchor}>
+                <Button
+                  onClick={toggleDrawer(anchor, true)}
+                  variant="contained"
+                  className="new-button"
+                >
+                  <AddIcon className="new-button__Icon" />
+                  <span className="new-button__Text">New Opportunity</span>
+                </Button>
+                <Drawer
+                  anchor={anchor}
+                  open={state[anchor]}
+                  onClose={toggleDrawer(anchor, false)}
+                >
+                  {list(anchor)}
+                </Drawer>
+              </React.Fragment>
+            ))}
             <Paper
               component="form"
               sx={{
@@ -221,8 +294,9 @@ const CustomTable = () => {
                             ? "pointer"
                             : null,
                         }}
-                        className="buttonCollapse"
+                        className="button-collapse"
                         onClick={(event) => {
+                          console.log(statusManagement);
                           if (
                             statusManagement.includes(
                               event.target.value.toLowerCase()
@@ -238,70 +312,96 @@ const CustomTable = () => {
                     </td>
                   </tr>
                 )}
-                {statusManagement.find((item) => item == e[0][`status`]) ? (
+                {statusManagement?.find((item) => item == e[0][`status`]) ? (
                   !expand.get(String(e[0][`status`])?.toLowerCase()) && (
-                    <tbody className="table-body" style={{ display: "block" }}>
-                      {e?.length &&
-                        search(e)?.map(
-                          (data, index) =>
-                            statusManagement.includes(data?.status) && (
-                              <tr key={index}>
-                                <td style={{ minWidth: "280px" }}>
-                                  {data.headline}
-                                </td>
-                                <td style={{ minWidth: "125px" }}>
-                                  {data.type}
-                                </td>
-                                <td
-                                  style={{
-                                    minWidth: "85px",
-                                    marginRight: "10px",
-                                  }}
-                                >
-                                  <Chip
-                                    variant="outlined"
-                                    color={data.color}
-                                    label={data?.status}
-                                  />
-                                </td>
-                                <td style={{ minWidth: "125px" }}>
-                                  {data.for}
-                                </td>
-                                <td style={{ minWidth: "125px" }}>
-                                  {data.dueName && (
-                                    <Avatar
-                                      sx={{
-                                        bgcolor: data.dueColor,
-                                      }}
+                    <DragDropContext onDragEnd={handleOnDragEnd}>
+                      <Droppable droppableId="characters">
+                        {(provided) => (
+                          <tbody
+                            {...provided.droppableProps}
+                            ref={provided.innerRef}
+                            className="table-body"
+                            style={{ display: "block" }}
+                          >
+                            {e?.length &&
+                              search(e)?.map(
+                                (data, index) =>
+                                  statusManagement?.includes(data?.status) && (
+                                    <Draggable
+                                      key={index}
+                                      draggableId={data.id}
+                                      index={index}
                                     >
-                                      {data.dueName}
-                                    </Avatar>
-                                  )}
-                                </td>
-                                <td style={{ minWidth: "180px" }}>
-                                  {data.planned}
-                                </td>
-                                <td style={{ minWidth: "80px" }}>
-                                  {data.effort}
-                                </td>
-                                <td style={{ minWidth: "80px" }}>
-                                  {data.effort}
-                                </td>
-                                <td style={{ minWidth: "140px" }}>
-                                  <StyledRating
-                                    name="customized-color"
-                                    defaultValue={data.business}
-                                    precision={1}
-                                    icon={<CircleIcon fontSize="inherit" />}
-                                    emptyIcon={
-                                      <CircleIcon fontSize="inherit" />
-                                    }
-                                  />
-                                </td>
-                              </tr>
-                            )
+                                      {(provided) => (
+                                        <tr
+                                          ref={provided.innerRef}
+                                          {...provided.draggableProps}
+                                          {...provided.dragHandleProps}
+                                          key={index}
+                                        >
+                                          <td style={{ minWidth: "280px" }}>
+                                            {data.headline}
+                                          </td>
+                                          <td style={{ minWidth: "125px" }}>
+                                            {data.type}
+                                          </td>
+                                          <td
+                                            style={{
+                                              minWidth: "85px",
+                                              marginRight: "10px",
+                                            }}
+                                          >
+                                            <Chip
+                                              variant="outlined"
+                                              color={data.color}
+                                              label={data?.status}
+                                            />
+                                          </td>
+                                          <td style={{ minWidth: "125px" }}>
+                                            {data.for}
+                                          </td>
+                                          <td style={{ minWidth: "125px" }}>
+                                            {data.dueName && (
+                                              <Avatar
+                                                sx={{
+                                                  bgcolor: data.dueColor,
+                                                }}
+                                              >
+                                                {data.dueName}
+                                              </Avatar>
+                                            )}
+                                          </td>
+                                          <td style={{ minWidth: "180px" }}>
+                                            {data.planned}
+                                          </td>
+                                          <td style={{ minWidth: "80px" }}>
+                                            {data.effort}
+                                          </td>
+                                          <td style={{ minWidth: "80px" }}>
+                                            {data.effort}
+                                          </td>
+                                          <td style={{ minWidth: "140px" }}>
+                                            <StyledRating
+                                              name="customized-color"
+                                              defaultValue={data.business}
+                                              precision={1}
+                                              icon={
+                                                <CircleIcon fontSize="inherit" />
+                                              }
+                                              emptyIcon={
+                                                <CircleIcon fontSize="inherit" />
+                                              }
+                                            />
+                                          </td>
+                                        </tr>
+                                      )}
+                                    </Draggable>
+                                  )
+                              )}
+                          </tbody>
                         )}
-                    </tbody>
+                      </Droppable>
+                    </DragDropContext>
                   )
                 ) : (
                   <tr style={{ textAlign: "center" }}>
