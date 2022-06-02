@@ -1,2 +1,2 @@
 # opportunity-table
-project mini 
+project mini use reactjs - hooks- formik - material ui 
