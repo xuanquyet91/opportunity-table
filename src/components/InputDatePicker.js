@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const InputDatePicker = ({ ...props }) => {
   // console.log(props);
+
   return (
     <div>
       <div
@@ -36,12 +37,15 @@ const InputDatePicker = ({ ...props }) => {
         <DatePicker
           dateFormat="d MMM yyyy"
           // placeholderText={props.title}
-          selected={props.contentSelected}
+          selected={
+            props.contentSelected ? new Date(props.contentSelected) : null
+          }
           // minDate={new Date()}
           // maxDate={endDate - 1}
-          // value={props.formik.values.createDue}
+          //value={props.contentSelected}
           onChange={(date: Date) => {
-            props.formik.setFieldValue(props.name, date);
+            // console.log(date);
+            props.formik.setFieldValue(props.name, new Date(date));
           }}
           name={props.name}
         />

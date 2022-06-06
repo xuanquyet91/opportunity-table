@@ -12,6 +12,8 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { databusinessValue, databusiness } from "../../data";
+import { Formik } from "formik";
+import InputField from "../../components/InputField";
 
 const BusinessValue = (props) => {
   const {
@@ -22,6 +24,8 @@ const BusinessValue = (props) => {
     stateGuidance,
     changeColor,
     checked,
+    formData,
+    formik,
   } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (event) => {
@@ -37,12 +41,17 @@ const BusinessValue = (props) => {
 
   useEffect(() => {
     setDataSelect(databusinessValue);
+    if (formData?.business) {
+      setBusinessGroup(formData?.business);
+      setdataView(formik.values?.businessGroup);
+    }
   }, []);
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
   const handleClickGroup = (item, index) => {
+    formik.setFieldValue("business", item);
     switch (item) {
       case "1":
         setBusinessGroup("1");
@@ -88,7 +97,12 @@ const BusinessValue = (props) => {
   const checkAddClass = (index, value) => {
     return index + 1 <= value ? `color${index + 1}` : "color0";
   };
+  // console.log(dataView);
+  // console.log(formik.values);
+  // console.log(props.formik);
+  // console.log(props.formik.values.business);
 
+  // console.log("formik", formik.values.text1);
   return (
     <>
       <div
@@ -198,16 +212,23 @@ const BusinessValue = (props) => {
                             ? "group-business-value__item color0"
                             : `group-business-value__item color${item}`
                         }
-                        value={item}
+                        // value={Formik.values.business}
+                        // defaultValue={Formik.values?.business}
+                        value={formik.values?.business}
+                        name="business"
                         onClick={() => handleClickGroup(item, index)}
                       ></span>
                     ))}
                   </div>
                   <div style={{ marginLeft: "20px", width: "367px" }}>
-                    <TextField
+                    <InputField
                       id="outlined-basic"
                       className="input-line1"
-                      variant="outlined"
+                      value={props.formik.values.businessValueText}
+                      onChange={props.formik.handleChange}
+                      name="businessValueText"
+                      formData={formData}
+                      defaultValue={props.formData?.businessValueText}
                     />
                   </div>
                 </div>
@@ -303,6 +324,12 @@ const BusinessValue = (props) => {
                           variant="contained"
                           onClick={() => {
                             setdataView(dataSelect);
+                            formik.setFieldValue(
+                              "businessGroup",
+                              dataSelect.id
+                            );
+                            // console.log("data", dataSelect);
+                            // console.log("formik", formik.values.businessGroup);
                             handleClose();
                           }}
                         >
@@ -312,9 +339,12 @@ const BusinessValue = (props) => {
                     </Typography>
                   </Popover>
                 </div>
+
                 <div>
-                  {dataView.map(
+                  {dataView?.map(
                     (item, index) =>
+                      // console.log(item);
+                      // console.log(`${item[`text${index + 1}`]}`);
                       item.isSelect && (
                         <div key={index} style={{ margin: "10px 0" }}>
                           <div
@@ -327,7 +357,7 @@ const BusinessValue = (props) => {
                             style={{ display: "flex", alignItems: "center" }}
                           >
                             <div className="group-business-value">
-                              {item.colorBusiness.map((ele, index) => (
+                              {item.colorBusiness?.map((ele, index) => (
                                 <span
                                   className={`group-business-value__item  ${checkAddClass(
                                     index,
@@ -346,11 +376,17 @@ const BusinessValue = (props) => {
                               ))}
                             </div>
                             <div style={{ marginLeft: "20px", width: "367px" }}>
-                              <TextField
+                              <InputField
                                 id="outlined-basic"
                                 className="input-line1"
-                                variant="outlined"
-                                placeholder="Placeholder Text"
+                                value={`${props.formik.values}.${
+                                  item[`text${index + 1}`]
+                                }`}
+                                onChange={props.formik.handleChange}
+                                name={`${item[`text${index + 1}`]}`}
+                                // name={`${item[`text${index + 1}`]}`}
+                                formData={formData}
+                                // defaultValue={props.formData?.text}
                               />
                             </div>
                           </div>

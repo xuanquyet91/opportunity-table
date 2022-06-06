@@ -65,6 +65,8 @@ const Summary = (props) => {
     setCurrentBusinessValue(value);
   };
 
+  // console.log(currentBusinessValue);
+
   return (
     <>
       <divq
@@ -193,6 +195,7 @@ const Summary = (props) => {
                         title={"Sponsor"}
                         name={"for"}
                         formik={formik}
+                        value={props.formik.values.for}
                         data={sponsorData}
                         infoTitle={"yes"}
                         infoImg={"yes"}
@@ -248,7 +251,13 @@ const Summary = (props) => {
                         title={"Business Unit"}
                         name={"dueName"}
                         formik={formik}
+                        value={
+                          formData?.dueName
+                            ? `${currentBusinessValue?.name}_${currentBusinessValue?.color}`
+                            : props.formik.values.dueName
+                        }
                         data={dueNameData}
+                        checkDataDueName={formData?.dueName}
                         // infoTitle={"all"}
                         handleCurrentBusinessValue={handleCurrentBusinessValue}
                         currentBusinessValue={currentBusinessValue}
@@ -280,6 +289,7 @@ const Summary = (props) => {
                         title={"Workstream"}
                         name={"workStream"}
                         formik={formik}
+                        value={props.formik.values.workStream}
                         data={workstreamData}
                         infoTitle={"info"}
                         contentInfo={
@@ -357,6 +367,7 @@ const Summary = (props) => {
                       title={"Assigned To"}
                       name={"assigned"}
                       formik={formik}
+                      value={props.formik.values.assigned}
                       data={assignedData}
                       class="full-width"
                       infoTitle={"info"}

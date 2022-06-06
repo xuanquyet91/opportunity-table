@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   TextField,
   InfoOutlinedIcon,
@@ -34,6 +34,9 @@ const BusinessNeed = (props) => {
     setChecked,
     changeColor,
     formik,
+    formData,
+    setStateCkBusinessNeed,
+    stateCkBusinessNeed,
   } = props;
   const [text, setText] = useState("");
   const [endDate, setEndDate] = useState();
@@ -54,6 +57,16 @@ const BusinessNeed = (props) => {
       setStateExpand("3");
     }
   };
+  useEffect(() => {
+    // setDataSelect(databusinessValue);
+    if (formData) {
+      setChecked(true);
+      // setBusinessGroup(formData?.business);
+      // setdataView(formik.values?.businessGroup);
+      // console.log("123");
+    }
+  }, []);
+  // console.log(formik.values);
 
   return (
     <>
@@ -146,18 +159,21 @@ const BusinessNeed = (props) => {
                 <div className="title">Business Need</div>
                 <div>
                   <CKEditor
+                    formik={formik}
                     editor={ClassicEditor}
                     id="header"
-                    data="<p></p>"
+                    data={`<p>${formik.values.ckBusinessNeed}</p>`}
+                    // content={formik.values.ckBusinessNeed}
                     onReady={(editor) => {
                       // You can store the "editor" and use when it is needed.
                       // console.log("Editor is ready to use!", editor);
                     }}
                     onChange={(event, editor) => {
                       const data = editor.getData();
-
-                      setText(data);
+                      setStateCkBusinessNeed(data);
+                      // setText(data);
                     }}
+                    name="ckBusinessNeed"
                   />
                 </div>
                 <div
@@ -192,7 +208,7 @@ const BusinessNeed = (props) => {
                         // onChange={(date: Date) => {
                         //   props.formik.setFieldValue("dueDate", date);
                         // }}
-                        name="dueDate"
+                        name={"dueDate"}
                       />
                     </div>
                   </div>
@@ -222,8 +238,8 @@ const BusinessNeed = (props) => {
                         id="outlined-basic"
                         // label="Critical reason"
                         placeholder="Critical reason"
-                        value={props.formik.values.criticalReason}
-                        onChange={props.formik.handleChange}
+                        value={formik.values.criticalReason}
+                        onChange={formik.handleChange}
                         name="criticalReason"
                         variant="outlined"
                         disabled={checked ? false : true}

@@ -173,6 +173,21 @@ export const dataTableHeader = [
     width: "130px",
   },
 ];
+export const effortData = [
+  {
+    name: "TBD",
+  },
+  { name: "Small" },
+  {
+    name: "Medium",
+  },
+  {
+    name: "Large",
+  },
+  {
+    name: "Extra Large",
+  },
+];
 export const currencies = [
   {
     name: "USD",
@@ -202,6 +217,7 @@ export const databusinessValue = [
     id: 1,
     value: 0,
     isSelect: false,
+    text1: "asd",
     colorBusiness: [
       {
         value: "1",
@@ -225,6 +241,7 @@ export const databusinessValue = [
     id: 2,
     isSelect: false,
     value: 0,
+    text2: "",
     colorBusiness: [
       {
         value: "1",
@@ -248,6 +265,7 @@ export const databusinessValue = [
     id: 3,
     value: 0,
     isSelect: false,
+    text3: "",
     colorBusiness: [
       {
         value: "1",
@@ -271,6 +289,7 @@ export const databusinessValue = [
     id: 4,
     value: 0,
     isSelect: false,
+    text4: "",
     colorBusiness: [
       {
         value: "1",
@@ -294,6 +313,7 @@ export const databusinessValue = [
     id: 5,
     value: 0,
     isSelect: false,
+    text5: "",
     colorBusiness: [
       {
         value: "1",
@@ -317,6 +337,7 @@ export const databusinessValue = [
     id: 6,
     value: 0,
     isSelect: false,
+    text6: "",
     colorBusiness: [
       {
         value: "1",
@@ -340,6 +361,7 @@ export const databusinessValue = [
     id: 7,
     value: 0,
     isSelect: false,
+    text7: "",
     colorBusiness: [
       {
         value: "1",
@@ -357,6 +379,50 @@ export const databusinessValue = [
         value: "5",
       },
     ],
+  },
+];
+export const businessValueDrivers = [
+  {
+    name: "Revenue growth",
+    id: 1,
+    value: 0,
+    description: "asd",
+  },
+  {
+    name: "Cost reduction",
+    id: 2,
+    value: 0,
+    description: "",
+  },
+  {
+    name: "Marketshare growth",
+    id: 3,
+    value: 0,
+    description: "",
+  },
+  {
+    name: "Customer experience improvement",
+    id: 4,
+    value: 0,
+    description: "",
+  },
+  {
+    name: "Productivity improvement",
+    id: 5,
+    value: 0,
+    description: "",
+  },
+  {
+    name: "Opportunity enablement",
+    id: 6,
+    value: 0,
+    description: "",
+  },
+  {
+    name: "Strategic alignment",
+    id: 7,
+    value: 0,
+    description: "",
   },
 ];
 export const dataOpportunityType = [
@@ -546,5 +612,71 @@ export const sponsorData = [
   },
   {
     name: "Test  Sponsor",
+  },
+];
+export const slidebarFilterData = [
+  {
+    title: "business unit",
+    options: [
+      "finance",
+      "operations",
+      "production",
+      "marketing",
+      "sales",
+      "data engineer",
+      "electro",
+      "hr",
+      "qa",
+    ],
+  },
+  {
+    title: "workstream",
+    options: ["workstream a", "workstream b", "workstream c"],
+  },
+  {
+    title: "sponsor",
+    options: [
+      "Jeremy sponsor",
+      "sandra sponsor",
+      "kevin sponsor",
+      "klein sponsor",
+      "eden user sponsor",
+      "john analyst",
+      "richard analyst",
+    ],
+  },
+  {
+    title: "estimated effort",
+    options: ["tbd", "large", "small"],
+  },
+  {
+    title: "assigned user",
+    options: [
+      "john analyst",
+      "admin account",
+      "richard analyst",
+      "seele sponsor",
+      "shun analyst",
+    ],
+  },
+  {
+    title: "critical",
+    options: ["critical"],
+  },
+  {
+    title: "due date",
+    // options: [],
+  },
+  {
+    title: "create date",
+    // options: [],
+  },
+  {
+    title: "planned start date",
+    // options: [],
+  },
+  {
+    title: "planned end date",
+    // options: [],
   },
 ];

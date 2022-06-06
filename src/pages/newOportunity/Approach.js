@@ -7,9 +7,18 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const Approach = (props) => {
-  const { index, title, currentClick, stateGuidance, handleClickCollapse } =
-    props;
+  const {
+    index,
+    title,
+    currentClick,
+    stateGuidance,
+    handleClickCollapse,
+    formik,
+    stateCkApproach,
+    setStateCkApproach,
+  } = props;
   const [text, setText] = useState("");
+  // const [stateCkApproach, setStateCkApproach] = useState("");
 
   return (
     <>
@@ -98,13 +107,16 @@ const Approach = (props) => {
                     <div>Proposed Approach</div>
                   </div>
                   <CKEditor
+                    formik={formik}
                     editor={ClassicEditor}
                     id="header"
-                    data=""
-                    onReady={(editor) => {}}
+                    data={`<p>${formik.values.ckApproach}</p>`}
+                    // onReady={(editor) => {}}
                     key={1}
+                    name="ckApproach"
                     onChange={(event, editor) => {
                       const data = editor.getData();
+                      setStateCkApproach(data);
                     }}
                   />
                 </div>

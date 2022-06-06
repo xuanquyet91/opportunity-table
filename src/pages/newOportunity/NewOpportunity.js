@@ -66,6 +66,10 @@ const NewOpportunity = (props) => {
     renderStateExpand,
     renderStateExpandWeb,
     updateID,
+    setStateCkApproach,
+    stateCkApproach,
+    setStateCkBusinessNeed,
+    stateCkBusinessNeed,
   } = props;
 
   const [data, setData] = useState(null);
@@ -74,30 +78,58 @@ const NewOpportunity = (props) => {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  // const [stateCkApproach, setStateCkApproach] = useState("");
 
   const dataInit = {
+    //summary
     headline: formData?.headline ? formData?.headline : "",
-    for: "",
-    createDue: "",
-    assigned: "",
-    workStream: "",
-    dueDate: "",
-    criticalReason: "",
+    for: formData?.for ? formData?.for : "",
+    businessUnit: formData?.businessUnit ? formData?.businessUnit : "",
+    workStream: formData?.workStream ? formData?.workStream : "",
+    createDue: formData?.createDue ? formData?.createDue : "",
+    dueName: formData?.dueName,
+    // createDue: "",
+    assigned: formData?.assigned ? formData?.assigned : "",
+    // bussiness need
+    ckBusinessNeed: formData?.ckBusinessNeed ? formData?.ckBusinessNeed : "",
+    dueDate: formData?.dueDate ? formData?.dueDate : "",
+    criticalReason: formData?.criticalReason ? formData?.criticalReason : "",
+    // bussiness value
+    business: formData?.business ? formData?.business : "",
+    businessValueText: formData?.businessValueText
+      ? formData?.businessValueText
+      : "",
+    businessGroup: formData?.businessGroup ? formData?.businessGroup : [],
+    text1: formData?.text1 ? formData?.text1 : "",
+    text2: formData?.text2 ? formData?.text2 : "",
+    text3: formData?.text3 ? formData?.text3 : "",
+    text4: formData?.text4 ? formData?.text4 : "",
+    text5: formData?.text5 ? formData?.text5 : "",
+    text6: formData?.text6 ? formData?.text6 : "",
+    text7: formData?.text7 ? formData?.text7 : "",
+    //appoarch
+    ckApproach: formData?.ckApproach ? formData?.ckApproach : "",
+    //planning
+    effort: formData?.effort ? formData?.effort : "",
+    effortDetail: formData?.effortDetail ? formData?.effortDetail : "",
+    planStartDate: formData?.planStartDate ? formData?.planStartDate : "",
+    planEndDate: formData?.planEndDate ? formData?.planEndDate : "",
   };
+  // console.log(formData);
+  // console.log(stateCkApproach);
 
   const [checked, setChecked] = useState(false);
 
   const formik = useFormik({
     initialValues: dataInit,
     onSubmit: (e, values) => {
-      console.log(e);
-      console.log(values);
+      // console.log("here", formik.setFieldValue("ckApproach", "abc"));
+      // setFieldValue("ckApproach", "abc");
+      // console.log("e", e);
+      // console.log("value", values);
       if (data) {
-        console.log("update");
-        console.log(updateID);
         onSubmitUpdate(e);
       } else {
-        console.log("create");
         onSubmitCreate(e);
       }
       // same shape as initial values
@@ -122,6 +154,7 @@ const NewOpportunity = (props) => {
           currentBusinessValue={currentBusinessValue}
           setCurrentBusinessValue={setCurrentBusinessValue}
           formData={formData}
+          setChecked={setChecked}
         />
       ),
     },
@@ -139,6 +172,9 @@ const NewOpportunity = (props) => {
           checked={checked}
           setChecked={setChecked}
           changeColor={"red-color"}
+          formData={formData}
+          setStateCkBusinessNeed={setStateCkBusinessNeed}
+          stateCkBusinessNeed={stateCkBusinessNeed}
         />
       ),
     },
@@ -153,17 +189,22 @@ const NewOpportunity = (props) => {
           stateGuidance={stateGuidance}
           checked={checked}
           changeColor={"red-color"}
+          formData={formData}
         />
       ),
     },
     {
       children: (
         <Approach
+          formik={formik}
           index={"4"}
           title={"approach"}
           currentClick={currentClick}
           handleClickCollapse={(data) => handleClickCollapse(data)}
           stateGuidance={stateGuidance}
+          formData={formData}
+          setStateCkApproach={setStateCkApproach}
+          stateCkApproach={stateCkApproach}
         />
       ),
     },
@@ -176,8 +217,9 @@ const NewOpportunity = (props) => {
           currentClick={currentClick}
           handleClickCollapse={(data) => handleClickCollapse(data)}
           stateGuidance={stateGuidance}
-          checked={checked}
+          // checked={checked}
           changeColor={"red-color"}
+          formData={formData}
         />
       ),
     },
@@ -241,15 +283,6 @@ const NewOpportunity = (props) => {
     setData(newData);
   };
 
-  // [].map(v,i)=> {
-  //   if(i == 0) {
-
-  //     dataInit[`form_${i+1}_headline`] = 'aaa';
-  //   }else {
-  //     dataInit[`form_${i+1}_rate`] = '15%'
-  //   }
-  // }
-  // console.log(formik.errors);
   const disablebButtonSave = () => {
     // console.log(formik.values);
     if (

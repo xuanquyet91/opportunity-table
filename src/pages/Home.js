@@ -34,6 +34,7 @@ import productApi from "../api/productApi";
 import axios from "axios";
 import NewOpportunityType from "./newOportunity/NewOpportunityType";
 import MuiModal from "../components/MuiModal";
+import SlidebarFilter from "../pages/filterBox/SlidebarFilter";
 
 const StyledRating = styled(Rating)({
   "& .MuiRating-iconFilled": {
@@ -54,6 +55,25 @@ let dataDetail = {
   business: "",
   color: "",
   id: "",
+  businessUnit: "",
+  workStream: "",
+  ckBusinessNeed: "",
+  criticalReason: "",
+  ckApproach: "",
+  effortDetail: "",
+  createDue: "",
+  dueDate: "",
+  planStartDate: "",
+  planEndDate: "",
+  businessValueText: "",
+  businessGroup: [],
+  text1: "",
+  text2: "",
+  text3: "",
+  text4: "",
+  text5: "",
+  text6: "",
+  text7: "",
 };
 const ITEM_HEIGHT = 48;
 
@@ -73,6 +93,12 @@ const Home = () => {
   const [openModal, setOpenModal] = React.useState(false);
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
+  //sildebar
+  const [checkShowSlide, setCheckShowSlide] = useState(false);
+  const [stateCkApproach, setStateCkApproach] = useState("");
+  const [stateCkBusinessNeed, setStateCkBusinessNeed] = useState("");
+
+  // const [stateUpdate, setStateUpdate] = useState({});
 
   const handleChange = (event) => {
     handleOpenModal();
@@ -183,6 +209,10 @@ const Home = () => {
         renderStateExpand={(data) => renderStateExpand(data)}
         renderStateExpandWeb={(data) => renderStateExpandWeb(data)}
         updateID={updateID}
+        stateCkApproach={stateCkApproach}
+        setStateCkApproach={setStateCkApproach}
+        setStateCkBusinessNeed={setStateCkBusinessNeed}
+        stateCkBusinessNeed={stateCkBusinessNeed}
       />
       {(stateExpand === "3" || stateExpand === "4") && (
         <NewOpportunityType
@@ -364,8 +394,14 @@ const Home = () => {
     // event.preventDefault();
     // console.log("vao day create");
     // console.log(data);
+    const newData = {
+      ...data,
+      ckApproach: stateCkApproach,
+      ckBusinessNeed: stateCkBusinessNeed,
+    };
+
     axios
-      .post(`https://6281bd1bed9edf7bd877ffb0.mockapi.io/product`, data)
+      .post(`https://6281bd1bed9edf7bd877ffb0.mockapi.io/product`, newData)
       .then(async (response) => {
         console.log("add succcess!", response);
         await fetchProductList();
@@ -375,11 +411,15 @@ const Home = () => {
   };
 
   const onSubmitUpdate = (data) => {
-    // event.preventDefault();
+    const newData = {
+      ...data,
+      ckApproach: stateCkApproach,
+      ckBusinessNeed: stateCkBusinessNeed,
+    };
     axios
       .put(
         `https://6281bd1bed9edf7bd877ffb0.mockapi.io/product/${updateID}`,
-        data
+        newData
       )
       .then(async (response) => {
         console.log("add succcess!", response);
@@ -411,6 +451,10 @@ const Home = () => {
     setAnchorEl(null);
   };
   // console.log(updateID);
+  const handleSlidebarFilter = () => {
+    console.log("abc");
+    setCheckShowSlide(!checkShowSlide);
+  };
   return (
     <>
       <MuiModal
@@ -434,7 +478,6 @@ const Home = () => {
           "Also, please go to Account Settings before you Import to set-up up your Business Units (if required)."
         }
       />
-
       <div className="home">
         {/* <NewOpportunity /> */}
         <Stack
@@ -484,7 +527,11 @@ const Home = () => {
               <FileUploadIcon />
               Import Csv
             </Button>
-            <Button className="style-button" variant="outlined">
+            <Button
+              onClick={handleSlidebarFilter}
+              className="style-button"
+              variant="outlined"
+            >
               <img src="https://www.svgrepo.com/show/318331/filter.svg" />
               Filter
             </Button>
@@ -840,7 +887,7 @@ const Home = () => {
                                               {data.planned}
                                             </td>
                                             <td style={{ minWidth: "80px" }}>
-                                              {data.effort}
+                                              {data.assigned}
                                             </td>
                                             <td style={{ minWidth: "80px" }}>
                                               {data.effort}
@@ -963,6 +1010,7 @@ const Home = () => {
           <CustomTable />
         )}
       </div>
+      <SlidebarFilter checkShowSlide={checkShowSlide} />
     </>
   );
 };

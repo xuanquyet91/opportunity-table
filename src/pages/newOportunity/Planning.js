@@ -6,8 +6,9 @@ import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { currencies } from "../../data";
+import { currencies, effortData } from "../../data";
 import InputDatePicker from "../../components/InputDatePicker";
+import InputMultiData from "../../components/InputMultiData";
 
 const Planning = (props) => {
   const {
@@ -19,6 +20,7 @@ const Planning = (props) => {
     formik,
     changeColor,
     check,
+    formData,
   } = props;
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
@@ -129,18 +131,13 @@ const Planning = (props) => {
                     />
                   </div>
                   <div className="icon-planning">
-                    <TextField
-                      id="outlined-select-currency"
-                      select
-                      label="TBD"
-                      onChange={handleChangeMulti}
-                    >
-                      {currencies.map((option) => (
-                        <MenuItem key={option.name} value={option.name}>
-                          {option.value}
-                        </MenuItem>
-                      ))}
-                    </TextField>
+                    <InputMultiData
+                      name={"effort"}
+                      formik={formik}
+                      value={props.formik.values.effort}
+                      data={effortData}
+                      contentInfo={"High-level estimate"}
+                    />
                   </div>
                   <div>
                     <TextField
@@ -148,6 +145,9 @@ const Planning = (props) => {
                       label="Detail"
                       className="input-line1"
                       variant="outlined"
+                      value={formik.values.effortDetail}
+                      onChange={formik.handleChange}
+                      name="effortDetail"
                     />
                   </div>
                 </div>
@@ -159,29 +159,21 @@ const Planning = (props) => {
                     alignItems: "center",
                   }}
                 >
-                  <div>
-                    <div className="title">Planned Start Date</div>
-                    <div className="start-date">
-                      <DatePicker
-                        dateFormat="d MMM yyyy"
-                        maxDate={endDate - 1}
-                        selected={startDate}
-                        onChange={(date: Date) => {
-                          setStartDate(date);
-                        }}
-                      />
-                    </div>
+                  <div className="start-date">
+                    <InputDatePicker
+                      formik={formik}
+                      name={"planStartDate"}
+                      title={"Planned Start Date"}
+                      contentSelected={props.formik.values.planStartDate}
+                    />
                   </div>
-                  <div>
-                    <div className="title">Planned Completion Date</div>
-                    <div className="start-date">
-                      <DatePicker
-                        dateFormat="d MMM yyyy"
-                        minDate={startDate}
-                        selected={endDate}
-                        onChange={(date: Date) => setEndDate(date)}
-                      />
-                    </div>
+                  <div className="start-date">
+                    <InputDatePicker
+                      formik={formik}
+                      name={"planEndDate"}
+                      title={"Planned End Date"}
+                      contentSelected={props.formik.values.planEndDate}
+                    />
                   </div>
                 </div>
               </div>
