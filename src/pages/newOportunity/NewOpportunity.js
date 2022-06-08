@@ -100,13 +100,6 @@ const NewOpportunity = (props) => {
       ? formData?.businessValueText
       : "",
     businessGroup: formData?.businessGroup ? formData?.businessGroup : [],
-    text1: formData?.text1 ? formData?.text1 : "",
-    text2: formData?.text2 ? formData?.text2 : "",
-    text3: formData?.text3 ? formData?.text3 : "",
-    text4: formData?.text4 ? formData?.text4 : "",
-    text5: formData?.text5 ? formData?.text5 : "",
-    text6: formData?.text6 ? formData?.text6 : "",
-    text7: formData?.text7 ? formData?.text7 : "",
     //appoarch
     ckApproach: formData?.ckApproach ? formData?.ckApproach : "",
     //planning
@@ -123,17 +116,13 @@ const NewOpportunity = (props) => {
   const formik = useFormik({
     initialValues: dataInit,
     onSubmit: (e, values) => {
-      // console.log("here", formik.setFieldValue("ckApproach", "abc"));
-      // setFieldValue("ckApproach", "abc");
+      // console.log("values", values);
       // console.log("e", e);
-      // console.log("value", values);
       if (data) {
         onSubmitUpdate(e);
       } else {
         onSubmitCreate(e);
       }
-      // same shape as initial values
-      // console.log(values);
     },
     validationSchema: SignupSchema,
   });

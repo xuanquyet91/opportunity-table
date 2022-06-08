@@ -3,7 +3,8 @@ import React from "react";
 import { InfoOutlinedIcon } from "../mui";
 
 const InputField = ({ ...props }) => {
-  // console.log(props);
+  // console.log(props.onChangeyarn start);
+  // console.log(props.value);
   return (
     <div>
       <div

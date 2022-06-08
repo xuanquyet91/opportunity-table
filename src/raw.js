@@ -1126,3 +1126,401 @@ const data = [
   "business": "$",
   "color": "warning"
 }
+const dataBusineedValue = [
+  {
+    "headline": "Increasing call volume analysis quyet test",
+    "type": "ACTIONda",
+    "status": "wishlist",
+    "for": "Kevin Sponsor",
+    "dueName": "ope",
+    "dueColor": "#d1230ced",
+    "typeColor": "#8bb4ff",
+    "planned": "29/04/2020",
+    "assigned": "Jack Sponsor",
+    "effort": "Small",
+    "business": "3",
+    "color": "info",
+    "businessUnit": "ope",
+    "workStream": "WorkstreamData A",
+    "ckBusinessNeed": "Start by selecting one or more of the options below.",
+    "criticalReason": "reason delay ok a",
+    "ckApproach": "First thing is - I don't want to initialize ckEditor in every page where I use Editors.",
+    "effortDetail": "effortDetail 1as",
+    "createDue": "2022-05-31T17:00:00.000Z",
+    "dueDate": "2022-06-01T17:00:00.000Z",
+    "planStartDate": "2022-05-31T17:00:00.000Z",
+    "planEndDate": "2022-06-02T17:00:00.000Z",
+    "businessValueText": "businessValueText 0",
+    "businessGroup": [{
+        "title": "Revenue growth",
+        "id": 1,
+        "value": 2,
+        "isSelect": true,
+        "text1": "",
+        "colorBusiness": [{
+            "value": "1"
+          },
+          {
+            "value": "2"
+          },
+          {
+            "value": "3"
+          },
+          {
+            "value": "4"
+          },
+          {
+            "value": "5"
+          }
+        ]
+      },
+      {
+        "title": "Cost reduction",
+        "id": 2,
+        "value": 3,
+        "isSelect": true,
+        "text2": "",
+        "colorBusiness": [{
+            "value": "1"
+          },
+          {
+            "value": "2"
+          },
+          {
+            "value": "3"
+          },
+          {
+            "value": "4"
+          },
+          {
+            "value": "5"
+          }
+        ]
+      },
+      {
+        "title": "Marketshare growth",
+        "id": 3,
+        "value": 1,
+        "isSelect": true,
+        "text3": "",
+        "colorBusiness": [{
+            "value": "1"
+          },
+          {
+            "value": "2"
+          },
+          {
+            "value": "3"
+          },
+          {
+            "value": "4"
+          },
+          {
+            "value": "5"
+          }
+        ]
+      },
+      {
+        "title": "Customer experience improvement",
+        "id": 4,
+        "value": 0,
+        "isSelect": false,
+        "text4": "",
+        "colorBusiness": [{
+            "value": "1"
+          },
+          {
+            "value": "2"
+          },
+          {
+            "value": "3"
+          },
+          {
+            "value": "4"
+          },
+          {
+            "value": "5"
+          }
+        ]
+      },
+      {
+        "title": "Productivity improvement",
+        "id": 5,
+        "value": 0,
+        "isSelect": false,
+        "text5": "",
+        "colorBusiness": [{
+            "value": "1"
+          },
+          {
+            "value": "2"
+          },
+          {
+            "value": "3"
+          },
+          {
+            "value": "4"
+          },
+          {
+            "value": "5"
+          }
+        ]
+      },
+      {
+        "title": "Opportunity enablement",
+        "id": 6,
+        "value": 0,
+        "isSelect": false,
+        "text6": "",
+        "colorBusiness": [{
+            "value": "1"
+          },
+          {
+            "value": "2"
+          },
+          {
+            "value": "3"
+          },
+          {
+            "value": "4"
+          },
+          {
+            "value": "5"
+          }
+        ]
+      },
+      {
+        "title": "Strategic alignment",
+        "id": 7,
+        "value": 0,
+        "isSelect": false,
+        "text7": "",
+        "colorBusiness": [{
+            "value": "1"
+          },
+          {
+            "value": "2"
+          },
+          {
+            "value": "3"
+          },
+          {
+            "value": "4"
+          },
+          {
+            "value": "5"
+          }
+        ]
+      }
+    ],
+    "id": "1",
+    "outlined-basic": "[object Object].undefineda"
+  }
+]
+
+// mock api
+
+{
+  "headline": "Increasing call volume analysis quyet test",
+  "type": "ACTIONda",
+  "status": "wishlist",
+  "for": "Kevin Sponsor",
+  "dueName": "Operations",
+  "dueColor": "#d1230ced",
+  "typeColor": "#8bb4ff",
+  "planned": "29/04/2020",
+  "assigned": "Jack Sponsor",
+  "effort": "Small",
+  "business": "3",
+  "color": "info",
+  "businessUnit": "ope",
+  "workStream": "WorkstreamData A",
+  "ckBusinessNeed": "",
+  "criticalReason": "reason delay ok a",
+  "ckApproach": "<p>First thing is - I don't want to initialize ckEditor in every page where I use Editors.dasdsad</p>",
+  "effortDetail": "effortDetail 1as",
+  "createDue": "2022-05-31T17:00:00.000Z",
+  "dueDate": "2022-06-01T17:00:00.000Z",
+  "planStartDate": "2022-05-31T17:00:00.000Z",
+  "planEndDate": "2022-06-02T17:00:00.000Z",
+  "businessValueText": "businessValueText 0",
+  "businessGroup": [
+   {
+    "title": "Revenue growth",
+    "id": 1,
+    "value": 2,
+    "isSelect": true,
+    "text1": "fsdsd",
+    "colorBusiness": [
+     {
+      "value": "1"
+     },
+     {
+      "value": "2"
+     },
+     {
+      "value": "3"
+     },
+     {
+      "value": "4"
+     },
+     {
+      "value": "5"
+     }
+    ]
+   },
+   {
+    "title": "Cost reduction",
+    "id": 2,
+    "value": 3,
+    "isSelect": true,
+    "text2": "",
+    "colorBusiness": [
+     {
+      "value": "1"
+     },
+     {
+      "value": "2"
+     },
+     {
+      "value": "3"
+     },
+     {
+      "value": "4"
+     },
+     {
+      "value": "5"
+     }
+    ]
+   },
+   {
+    "title": "Marketshare growth",
+    "id": 3,
+    "value": 1,
+    "isSelect": true,
+    "text3": "",
+    "colorBusiness": [
+     {
+      "value": "1"
+     },
+     {
+      "value": "2"
+     },
+     {
+      "value": "3"
+     },
+     {
+      "value": "4"
+     },
+     {
+      "value": "5"
+     }
+    ]
+   },
+   {
+    "title": "Customer experience improvement",
+    "id": 4,
+    "value": 0,
+    "isSelect": false,
+    "text4": "",
+    "colorBusiness": [
+     {
+      "value": "1"
+     },
+     {
+      "value": "2"
+     },
+     {
+      "value": "3"
+     },
+     {
+      "value": "4"
+     },
+     {
+      "value": "5"
+     }
+    ]
+   },
+   {
+    "title": "Productivity improvement",
+    "id": 5,
+    "value": 0,
+    "isSelect": false,
+    "text5": "",
+    "colorBusiness": [
+     {
+      "value": "1"
+     },
+     {
+      "value": "2"
+     },
+     {
+      "value": "3"
+     },
+     {
+      "value": "4"
+     },
+     {
+      "value": "5"
+     }
+    ]
+   },
+   {
+    "title": "Opportunity enablement",
+    "id": 6,
+    "value": 0,
+    "isSelect": false,
+    "text6": "",
+    "colorBusiness": [
+     {
+      "value": "1"
+     },
+     {
+      "value": "2"
+     },
+     {
+      "value": "3"
+     },
+     {
+      "value": "4"
+     },
+     {
+      "value": "5"
+     }
+    ]
+   },
+   {
+    "title": "Strategic alignment",
+    "id": 7,
+    "value": 0,
+    "isSelect": false,
+    "text7": "",
+    "colorBusiness": [
+     {
+      "value": "1"
+     },
+     {
+      "value": "2"
+     },
+     {
+      "value": "3"
+     },
+     {
+      "value": "4"
+     },
+     {
+      "value": "5"
+     }
+    ]
+   }
+  ],
+  "text1": "text1 1",
+  "text2": "text2 1",
+  "text3": "text3 1",
+  "text4": "text4 1",
+  "text5": "text5 1",
+  "text6": "text6 1",
+  "text7": "text7 1",
+  "id": "1",
+  "fsdsd": "[object Object].fsdsda"
+ }

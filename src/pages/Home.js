@@ -67,13 +67,6 @@ let dataDetail = {
   planEndDate: "",
   businessValueText: "",
   businessGroup: [],
-  text1: "",
-  text2: "",
-  text3: "",
-  text4: "",
-  text5: "",
-  text6: "",
-  text7: "",
 };
 const ITEM_HEIGHT = 48;
 
@@ -393,7 +386,8 @@ const Home = () => {
   const onSubmitCreate = (data) => {
     // event.preventDefault();
     // console.log("vao day create");
-    // console.log(data);
+    console.log("data",data);
+    console.log("newdata",newData);
     const newData = {
       ...data,
       ckApproach: stateCkApproach,

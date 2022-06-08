@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   TextField,
   Button,
@@ -11,7 +11,11 @@ import {
 } from "../../mui";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import { databusinessValue, databusiness } from "../../data";
+import {
+  databusinessValue,
+  databusiness,
+  businessValueDrivers,
+} from "../../data";
 import { Formik } from "formik";
 import InputField from "../../components/InputField";
 
@@ -27,6 +31,7 @@ const BusinessValue = (props) => {
     formData,
     formik,
   } = props;
+  const textInput = useRef("");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -34,16 +39,24 @@ const BusinessValue = (props) => {
   const [businessGroup, setBusinessGroup] = useState(["0"]);
   const [dataSelect, setDataSelect] = useState([]);
   const [dataView, setdataView] = useState([]);
+  const [isSelected, setIsSelected] = useState([]);
 
   const handleClose = () => {
     setAnchorEl(null);
   };
 
   useEffect(() => {
-    setDataSelect(databusinessValue);
+    // setDataSelect(databusinessValue);
+
     if (formData?.business) {
       setBusinessGroup(formData?.business);
+      setDataSelect(formik.values?.businessGroup);
+    }
+    if (formData) {
+      setDataSelect(formik.values?.businessGroup);
       setdataView(formik.values?.businessGroup);
+    } else {
+      setDataSelect(businessValueDrivers);
     }
   }, []);
 
@@ -76,6 +89,8 @@ const BusinessValue = (props) => {
   };
   const handleClickGroupAddData = (id, value) => {
     const arr = [...dataSelect];
+    console.log(arr);
+    console.log(value);
     for (var i in arr) {
       if (arr[i].id == id) {
         if (value != arr[i].value) arr[i].value = value;
@@ -94,15 +109,65 @@ const BusinessValue = (props) => {
     setDataSelect(arr);
   };
 
-  const checkAddClass = (index, value) => {
-    return index + 1 <= value ? `color${index + 1}` : "color0";
+  const checkAddClass = (index) => {
+    // return index + 1 <= value ? `color${index + 1}` : "color0";
   };
-  // console.log(dataView);
-  // console.log(formik.values);
-  // console.log(props.formik);
-  // console.log(props.formik.values.business);
 
-  // console.log("formik", formik.values.text1);
+  // custom file
+
+  const checkAddClassCustom = (index, ele) => {
+    return index + 1 <= ele ? `color${index + 1}` : "color0";
+  };
+
+  const handleClickGroupCheckCustom = (data, id) => {
+    // console.log(data, id);
+    const arr = [...dataSelect];
+    if (isSelected?.find((item) => item === id)) {
+      setIsSelected(isSelected?.filter((item) => item !== id));
+    } else {
+      setIsSelected((prev) => [...prev, id]);
+    }
+    // console.log(isSelected.length === 0);
+    // for (var i in arr) {
+    //   if (arr[i].id == id) {
+    //     isSelected?.filter(
+    //       (item) => arr[i].id !== item && setIsSelected((prev) => [...prev, id])
+    //     );
+    //     console.log("edit color");
+    //   } else {
+    //     console.log("no edit color");
+    //   }
+    // }
+    // setDataSelect(arr);
+  };
+  // console.log(isSelected);
+
+  const handleClickGroupAddDataCustom = (id, ele) => {
+    const arr = [...dataSelect];
+    for (var i in arr) {
+      if (arr[i].id == id) {
+        if (ele != arr[i].value) arr[i].value = ele;
+        else arr[i].value = 0;
+      }
+    }
+    setDataSelect(arr);
+  };
+
+  function handleInputBusinessValues(e, idItem) {
+    textInput.current = e;
+    const arr = [...dataView];
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].id === idItem) {
+        arr[i].description = textInput.current;
+      }
+    }
+    setdataView(arr);
+  }
+  const checkIsSelected = (id) => {
+    const result = isSelected?.find((select) => select === id) ? true : false;
+    return result;
+  };
+  console.log(checkIsSelected());
   return (
     <>
       <div
@@ -212,8 +277,6 @@ const BusinessValue = (props) => {
                             ? "group-business-value__item color0"
                             : `group-business-value__item color${item}`
                         }
-                        // value={Formik.values.business}
-                        // defaultValue={Formik.values?.business}
                         value={formik.values?.business}
                         name="business"
                         onClick={() => handleClickGroup(item, index)}
@@ -268,49 +331,59 @@ const BusinessValue = (props) => {
                         <div className="title">Select Value Drivers</div>
                         <InfoOutlinedIcon />
                       </div>
-                      {dataSelect.map((item, index) => (
-                        <div key={index} style={{ margin: "10px 0" }}>
-                          <div
-                            style={{ fontWeight: "500" }}
-                            className="sub-title"
-                          >
-                            {item.title}
-                          </div>
-                          <div style={{ display: "flex" }}>
-                            <div style={{ width: "30px" }}>
-                              <FormControlLabel
-                                control={
-                                  <Checkbox
-                                    checked={item.isSelect}
-                                    onChange={(e, checked) =>
-                                      handleClickGroupCheck(e, checked, item.id)
-                                    }
-                                  />
-                                }
-                              />
+                      {dataSelect.map((item, index) => {
+                        return (
+                          <div key={index} style={{ margin: "10px 0" }}>
+                            <div
+                              style={{ fontWeight: "500" }}
+                              className="sub-title"
+                            >
+                              {item.name}
                             </div>
-                            <div className="group-business-value">
-                              {item.colorBusiness.map((ele, index) => (
-                                <span
-                                  className={`group-business-value__item  ${checkAddClass(
-                                    index,
-                                    item.value
-                                  )}`}
-                                  value={ele.value}
-                                  onClick={() => {
-                                    if (item.isSelect) {
-                                      handleClickGroupAddData(
-                                        item.id,
-                                        ele.value
-                                      );
-                                    }
-                                  }}
-                                ></span>
-                              ))}
+                            <div style={{ display: "flex" }}>
+                              <div style={{ width: "30px" }}>
+                                <FormControlLabel
+                                  control={
+                                    <Checkbox
+                                      // checked={
+                                      //   isSelected?.find(
+                                      //     (select) => select === id
+                                      //   )
+                                      //     ? false
+                                      //     : true
+                                      // }
+                                      defaultChecked={checkIsSelected(item.id)}
+                                      onChange={(e) =>
+                                        handleClickGroupCheckCustom(e, item.id)
+                                      }
+                                    />
+                                  }
+                                />
+                              </div>
+                              <div className="group-business-value">
+                                {[...Array(5).keys()].map((ele, index) => {
+                                  return (
+                                    <span
+                                      className={`group-business-value__item ${checkAddClassCustom(
+                                        index,
+                                        item.value
+                                      )}`}
+                                      value={ele + 1}
+                                      onClick={() =>
+                                        handleClickGroupAddDataCustom(
+                                          item.id,
+                                          ele + 1
+                                        )
+                                      }
+                                    ></span>
+                                  );
+                                })}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
+                        );
+                      })}
+
                       <div style={{ display: "flex", justifyContent: "end" }}>
                         <Button
                           style={{ marginBottom: "20px" }}
@@ -324,12 +397,7 @@ const BusinessValue = (props) => {
                           variant="contained"
                           onClick={() => {
                             setdataView(dataSelect);
-                            formik.setFieldValue(
-                              "businessGroup",
-                              dataSelect.id
-                            );
-                            // console.log("data", dataSelect);
-                            // console.log("formik", formik.values.businessGroup);
+                            formik.setFieldValue("businessGroup", dataSelect);
                             handleClose();
                           }}
                         >
@@ -341,95 +409,57 @@ const BusinessValue = (props) => {
                 </div>
 
                 <div>
-                  {dataView?.map(
-                    (item, index) =>
-                      // console.log(item);
-                      // console.log(`${item[`text${index + 1}`]}`);
-                      item.isSelect && (
+                  {dataView?.map((item, index) => {
+                    return (
+                      item.value > 0 && (
                         <div key={index} style={{ margin: "10px 0" }}>
                           <div
                             style={{ fontWeight: "500" }}
                             className="sub-title"
                           >
-                            {item.title}
+                            {item.name}
                           </div>
                           <div
                             style={{ display: "flex", alignItems: "center" }}
                           >
                             <div className="group-business-value">
-                              {item.colorBusiness?.map((ele, index) => (
-                                <span
-                                  className={`group-business-value__item  ${checkAddClass(
-                                    index,
-                                    item.value
-                                  )}`}
-                                  value={ele.value}
-                                  onClick={() => {
-                                    if (item.isSelect) {
-                                      handleClickGroupAddData(
+                              {[...Array(5).keys()].map((ele, index) => {
+                                return (
+                                  <span
+                                    className={`group-business-value__item ${checkAddClassCustom(
+                                      index,
+                                      item.value
+                                    )}`}
+                                    value={ele + 1}
+                                    onClick={() =>
+                                      handleClickGroupAddDataCustom(
                                         item.id,
-                                        ele.value
-                                      );
+                                        ele + 1
+                                      )
                                     }
-                                  }}
-                                ></span>
-                              ))}
+                                  ></span>
+                                );
+                              })}
                             </div>
                             <div style={{ marginLeft: "20px", width: "367px" }}>
                               <InputField
                                 id="outlined-basic"
                                 className="input-line1"
-                                value={`${props.formik.values}.${
-                                  item[`text${index + 1}`]
-                                }`}
-                                onChange={props.formik.handleChange}
-                                name={`${item[`text${index + 1}`]}`}
-                                // name={`${item[`text${index + 1}`]}`}
-                                formData={formData}
-                                // defaultValue={props.formData?.text}
+                                value={item.description}
+                                onChange={(e) =>
+                                  handleInputBusinessValues(
+                                    e.target.value,
+                                    item.id
+                                  )
+                                }
+                                formData={dataView}
                               />
                             </div>
                           </div>
                         </div>
                       )
-                  )}
-                  {/*  for data after select */}
-                  {/* {dataSelect.map(
-                    (item, index) =>
-                      item.isSelect && (
-                        <div key={index} style={{ margin: "10px 0" }}>
-                          <div
-                            style={{ fontWeight: "500" }}
-                            className="sub-title"
-                          >
-                            {item.title}
-                          </div>
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <div className="group-business-value">
-                              {item.colorBusiness.map((ele) => (
-                                <span
-                                  className="group-business-value__item"
-                                  value={ele.value}
-                                  onClick={() =>
-                                    handleClickGroupAddData(ele.value)
-                                  }
-                                ></span>
-                              ))}
-                            </div>
-                            <div style={{ marginLeft: "20px", width: "367px" }}>
-                              <TextField
-                                id="outlined-basic"
-                                className="input-line1"
-                                variant="outlined"
-                                placeholder="Placeholder Text"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      )
-                  )} */}
+                    );
+                  })}
                 </div>
               </div>
             )}
